@@ -73,7 +73,7 @@ class DockerExecutor implements Serializable {
 
 								stepState.categories = readStepCategories(step.image)
 
-								image.inside("-u 0:0 -v /var/run/docker.sock:/var/run/docker.sock") {
+								image.inside("--net=host -u 0:0 -v /var/run/docker.sock:/var/run/docker.sock") {
 									for (def i = 0; i < step.commands.size(); i++) {
 										CommandState commandState = new CommandState(step.commands[i])
 										stepState.addCommand(commandState)  // record command progress
